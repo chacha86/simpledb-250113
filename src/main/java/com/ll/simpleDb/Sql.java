@@ -73,7 +73,6 @@ public class Sql {
         row3.put("modifiedDate", LocalDateTime.now());
         row3.put("isBlind", false);
 
-
         rows.add(row1);
         rows.add(row2);
         rows.add(row3);
