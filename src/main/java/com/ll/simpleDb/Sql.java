@@ -100,4 +100,8 @@ public class Sql {
     public Long selectLong() {
         return 1L;
     }
+
+    public String selectString() {
+        return "제목1";
+    }
 }
