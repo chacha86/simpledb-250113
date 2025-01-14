@@ -30,7 +30,7 @@ public class Sql {
     }
 
     public long insert() {
-        return 1;
+        return simpleDb.insert(sqlBuilder.toString(), params);
     }
 
     public int update() {
