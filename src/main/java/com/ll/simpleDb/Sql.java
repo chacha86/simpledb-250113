@@ -1,5 +1,7 @@
 package com.ll.simpleDb;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,19 +10,23 @@ import java.util.Map;
 
 public class Sql {
 
-    private String sqlFormat;
+    private final SimpleDb simpleDb;
+    private final StringBuilder sqlBuilder;
 
-    public Sql() {
-
+    public Sql(SimpleDb simpleDb) {
+        this.sqlBuilder = new StringBuilder();
+        this.simpleDb = simpleDb;
     }
 
     public Sql append(String sqlLine) {
-        this.sqlFormat = sqlLine;
+        this.sqlBuilder.append(sqlLine);
+        this.sqlBuilder.append(" ");
         return this;
     }
 
     public Sql append(String sqlLine, Object... args) {
-        this.sqlFormat = sqlLine;
+        this.sqlBuilder.append(sqlLine);
+        this.sqlBuilder.append(" ");
         return this;
     }
 
@@ -106,13 +112,6 @@ public class Sql {
     }
 
     public Boolean selectBoolean() {
-
-        if("SELECT 1 = 1".equals(sqlFormat)) {
-            return true;
-        } else if("SELECT 1 = 0".equals(sqlFormat)) {
-            return false;
-        }
-
-        return false;
+        return simpleDb.selectBoolean(sqlBuilder.toString());
     }
 }
