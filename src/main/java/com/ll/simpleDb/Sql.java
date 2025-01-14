@@ -106,8 +106,11 @@ public class Sql {
         String replacedSql = sql.replaceAll("\\?", inCluase);
         this.params.addAll(Arrays.stream(args).toList());
         this.sqlBuilder.append(replacedSql);
+
+        return this;
     }
 
     public List<Long> selectLongs() {
+        return simpleDb.selectLongs(sqlBuilder.toString(), params);
     }
 }
