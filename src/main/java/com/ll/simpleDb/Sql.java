@@ -1,21 +1,19 @@
 package com.ll.simpleDb;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Sql {
 
     private final SimpleDb simpleDb;
+    private final List<Object> params;
     private final StringBuilder sqlBuilder;
 
     public Sql(SimpleDb simpleDb) {
         this.sqlBuilder = new StringBuilder();
         this.simpleDb = simpleDb;
+        this.params = new ArrayList<>();
     }
 
     public Sql append(String sqlLine) {
@@ -25,6 +23,7 @@ public class Sql {
     }
 
     public Sql append(String sqlLine, Object... args) {
+        this.params.addAll(Arrays.stream(args).toList());
         this.sqlBuilder.append(sqlLine);
         this.sqlBuilder.append(" ");
         return this;
@@ -39,7 +38,7 @@ public class Sql {
     }
 
     public int delete() {
-        return 2;
+        return simpleDb.delete(sqlBuilder.toString(), params);
     }
 
     public List<Map<String, Object>> selectRows() {
@@ -75,26 +74,26 @@ public class Sql {
         rows.add(row2);
         rows.add(row3);
 
-        return simpleDb.selectRows(sqlBuilder.toString());
+        return simpleDb.selectRows(sqlBuilder.toString(), params);
     }
 
     public Map<String, Object> selectRow() {
-        return simpleDb.selectRow(sqlBuilder.toString());
+        return simpleDb.selectRow(sqlBuilder.toString(), params);
     }
 
     public LocalDateTime selectDatetime() {
-        return simpleDb.selectDatetime(sqlBuilder.toString());
+        return simpleDb.selectDatetime(sqlBuilder.toString(), params);
     }
 
     public Long selectLong() {
-        return simpleDb.selectLong(sqlBuilder.toString());
+        return simpleDb.selectLong(sqlBuilder.toString(), params);
     }
 
     public String selectString() {
-        return simpleDb.selectString(sqlBuilder.toString());
+        return simpleDb.selectString(sqlBuilder.toString(), params);
     }
 
     public Boolean selectBoolean() {
-        return simpleDb.selectBoolean(sqlBuilder.toString());
+        return simpleDb.selectBoolean(sqlBuilder.toString(), params);
     }
 }

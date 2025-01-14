@@ -111,7 +111,7 @@ public class SimpleDbTest {
 
         assertThat(affectedRowsCount).isEqualTo(3);
     }
-//
+
     @Test
     @DisplayName("delete")
     public void t003() {
@@ -133,7 +133,7 @@ public class SimpleDbTest {
 
         assertThat(affectedRowsCount).isEqualTo(2);
     }
-//
+
     @Test
     @DisplayName("selectRows")
     public void t004() {
