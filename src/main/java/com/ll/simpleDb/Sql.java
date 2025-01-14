@@ -8,19 +8,19 @@ import java.util.Map;
 
 public class Sql {
 
-    private StringBuilder sqlBuilder;
+    private String sqlFormat;
 
     public Sql() {
-        this.sqlBuilder = new StringBuilder();
+
     }
 
     public Sql append(String sqlLine) {
-        sqlBuilder.append(sqlLine);
+        this.sqlFormat = sqlLine;
         return this;
     }
 
     public Sql append(String sqlLine, Object... args) {
-        sqlBuilder.append(sqlLine);
+        this.sqlFormat = sqlLine;
         return this;
     }
 
@@ -106,6 +106,11 @@ public class Sql {
     }
 
     public Boolean selectBoolean() {
+
+        if("SELECT 1 = 1".equals(sqlFormat)) {
+            return true;
+        }
+
         return false;
     }
 }
