@@ -100,7 +100,7 @@ public class Sql {
     }
 
     public LocalDateTime selectDatetime() {
-        return LocalDateTime.now();
+        return simpleDb.selectDatetime(sqlBuilder.toString());
     }
 
     public Long selectLong() {
