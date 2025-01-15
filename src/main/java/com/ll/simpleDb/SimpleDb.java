@@ -172,4 +172,7 @@ public class SimpleDb {
                 .map(map -> (Long) map.values().iterator().next())
                 .toList();
     }
+
+    public void close() {
+    }
 }
